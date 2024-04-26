@@ -4,6 +4,27 @@ If you want to know more widely about HTTP in video format, and the context of t
 
 To understand the HTTP verbs and methods, let's go back to the start of the HTTP protocol. 
 
+<!-- TOC -->
+
+- [HTTP](#http)
+    - [HTTP History and Purpose](#http-history-and-purpose)
+        - [Evolution of HTTP](#evolution-of-http)
+        - [Purpose of HTTP](#purpose-of-http)
+    - [Request/Response Model](#requestresponse-model)
+        - [Request Components](#request-components)
+        - [Response Components](#response-components)
+        - [Example](#example)
+            - [Request](#request)
+            - [Response](#response)
+    - [Methods](#methods)
+        - [Idempotence](#idempotence)
+    - [Cheat Sheet](#cheat-sheet)
+    - [HTTP Status Codes](#http-status-codes)
+        - [Status Code Classes](#status-code-classes)
+        - [Common Status Codes](#common-status-codes)
+
+<!-- /TOC -->
+
 ## HTTP History and Purpose
 
 HTTP, or *Hypertext Transfer Protocol*, is the foundation of data communication on the World Wide Web. It's an application-layer protocol that facilitates the transfer of hypermedia documents, such as HTML pages, images, and other resources, between *clients and servers*.
@@ -112,3 +133,40 @@ Got all that? Well, good news, the most common operations are analogous to CRUD 
 | PUT         | Update/Replace | Updates or replaces a resource on the server with the provided data. If the resource doesn't exist, it may create a new one. |
 | DELETE      | Delete | Removes a resource identified by the specified URL from the server. It deletes the resource permanently. |
 
+---
+
+## HTTP Status Codes
+
+HTTP status codes are three-digit numbers returned by a server in response to a client's request made to the server. They provide information about the outcome of the request and any actions that need to be taken.
+
+### Status Code Classes
+
+Status codes are grouped into the following classes:
+
+- **1xx Informational**: Request received, continuing process.
+- **2xx Success**: The action was successfully received, understood, and accepted.
+- **3xx Redirection**: Further action must be taken to complete the request.
+- **4xx Client Error**: The request contains bad syntax or cannot be fulfilled.
+- **5xx Server Error**: The server failed to fulfill a seemingly valid request.
+
+### Common Status Codes
+
+| Code | Name | Description |
+|------|------|-------------|
+| 200  | OK | The request has succeeded. |
+| 201  | Created | The request has been fulfilled, and a new resource has been created. |
+| 204  | No Content | The server successfully processed the request but does not need to return any content. |
+| 301  | Moved Permanently | The requested resource has been permanently moved to a new location. |
+| 400  | Bad Request | The server cannot process the request due to client error (e.g., malformed syntax). |
+| 401  | Unauthorized | The request requires user authentication. |
+| 404  | Not Found | The requested resource could not be found on the server. |
+| 500  | Internal Server Error | A generic server error message when no specific error message is suitable. |
+
+### How are they used by the client?
+
+By receiving and interpreting status codes, the client can handle failures gracefully. 
+
+1. **Error Handling** When the server encounters an error (e.g., 404 Not Found, 500 Internal Server Error), it communicates this to the client through the appropriate status code. The client can then display a user-friendly error message or take alternative actions to mitigate the issue.
+2. **Retries** In some cases, the client may attempt to retry the request if it receives a temporary error (e.g., 503 Service Unavailable). By understanding the status code, the client can determine whether it's appropriate to retry the request and how many times to retry.
+3. **Redirects** If the server needs the client to navigate to a different URL (e.g., due to a resource being moved), it can issue a redirect status code (e.g., 301 Moved Permanently, 302 Found). The client can then automatically follow the redirect to the new URL.
+4. **Authentication Challenges** If the server requires authentication for a particular resource, it can return a 401 Unauthorized status code. The client can then prompt the user to provide credentials or handle the authentication challenge in an appropriate manner.
