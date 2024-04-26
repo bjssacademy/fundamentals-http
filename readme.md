@@ -1,5 +1,7 @@
 # HTTP
 
+If you want to know more widely about HTTP in video format, and the context of the WWW, check out [this excellent video](https://www.youtube.com/watch?v=wW2A5SZ3GkI).
+
 To understand the HTTP verbs and methods, let's go back to the start of the HTTP protocol. 
 
 ## HTTP History and Purpose
